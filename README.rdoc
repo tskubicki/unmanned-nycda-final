@@ -1,28 +1,10 @@
-== README
+==Unmanned
+by Thomas Skubicki
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Unmanned is a site where you and your friends can come and blast hordes of aliens out of the sky for free!
+See who is the top pilot among your friends, or try and out-do the best pilots on the site's leaderboard.
+See your progress with your games history and see how you're doing.
 
-Things you may want to cover:
+Very Large Paypal donations welcome.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+More to come...
