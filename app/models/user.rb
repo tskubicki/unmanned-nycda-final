@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
 
   has_many :friendships
   has_many :friends, :through => :friendships
+  has_one :role
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
