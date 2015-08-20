@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150820150536) do
+ActiveRecord::Schema.define(version: 20150820154359) do
 
   create_table "friends", force: :cascade do |t|
     t.integer  "user_id"
@@ -25,6 +25,21 @@ ActiveRecord::Schema.define(version: 20150820150536) do
     t.integer  "friend_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "games", force: :cascade do |t|
+    t.integer  "user_id"
+    t.decimal  "game_time"
+    t.decimal  "score"
+    t.decimal  "damage_taken"
+    t.decimal  "damage_inflicted"
+    t.decimal  "laser_time"
+    t.decimal  "slaser_time"
+    t.decimal  "mg_time"
+    t.decimal  "rocket_time"
+    t.decimal  "mine_time"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "roles", force: :cascade do |t|
