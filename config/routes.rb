@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   get 'game/play'
+  post 'game/create'
 
   get 'landing/index'
 
