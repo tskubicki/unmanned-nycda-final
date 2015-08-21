@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'game/play'
+
   get 'landing/index'
 
   devise_for :users
