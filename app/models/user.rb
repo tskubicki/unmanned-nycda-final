@@ -17,4 +17,9 @@ class User < ActiveRecord::Base
 
 	validates_attachment_content_type :avatar,
 		:content_type => /\Aimage\/.*\Z/
+
+    #kinda dirty, but it works for now
+    def self.get_username_of(input_id)
+      User.find(input_id).username
+    end
 end

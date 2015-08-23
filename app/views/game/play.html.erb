@@ -1,17 +1,55 @@
-<div id="fb-root"></div>
-	
-	<script>
-	// Issue a warning if trying to preview an exported project on disk.
-	(function(){
-		// Check for running exported on file protocol
-		if (window.location.protocol.substr(0, 4) === "file")
-		{
-			alert("Exported games won't work until you upload them. (When running on the file:/// protocol, browsers block many features from working for security reasons.)");
-		}
-	})();
-	</script>
-	
-	<!-- The canvas must be inside a div called c2canvasdiv -->
+<style>
+	* {
+		padding: 0;
+		margin: 0;
+	}
+	html, body {
+		background: #000;
+		color: #fff;
+		overflow: hidden;
+	}
+	canvas {
+		touch-action-delay: none;
+		touch-action: none;
+		-ms-touch-action: none;
+	}
+	#inspect-outline {
+		position: absolute;
+		border: 2px dotted red;
+		overflow: hidden;
+		font-size: 8pt;
+		font-family: Sans serif;
+		color: #444;
+		pointer-events: none;
+		-webkit-animation: flash 2s linear 0s infinite;
+		-moz-animation: flash 2s linear 0s infinite;
+		-o-animation: flash 2s linear 0s infinite;
+		animation: flash 2s linear 0s infinite;
+		background-image: url(debugger-inspect.png);
+	}
+
+	@-webkit-keyframes flash {
+		0%, 75%, 100% {opacity: 1;}
+		87% {opacity: 0.25;}
+	}
+
+	@-moz-keyframes flash {
+		0%, 75%, 100% {opacity: 1;}
+		87% {opacity: 0.25;}
+	}
+
+	@-o-keyframes flash {
+		0%, 75%, 100% {opacity: 1;}
+		87% {opacity: 0.25;}
+	}
+
+	@keyframes flash {
+		0%, 75%, 100% {opacity: 1;}
+		87% {opacity: 0.25;}
+	}
+</style>
+
+<!-- The canvas must be inside a div called c2canvasdiv -->
 	<div id="c2canvasdiv">
 	
 		<!-- The canvas the project will render to.  If you change its ID, don't forget to change the
@@ -32,14 +70,14 @@
 	
 	<!-- Pages load faster with scripts at the bottom -->
 	
-	<!-- Construct 2 exported games require jQuery. -->
-	<script src="jquery-2.1.1.min.js"></script>
+	<!-- Construct 2 exported games require jQuery.
+	<script src="jquery-2.1.1.min.js"></script> -->
 
 
 	
     <!-- The runtime script.  You can rename it, but don't forget to rename the reference here as well.
-    This file will have been minified and obfuscated if you enabled "Minify script" during export. -->
-	<script src="c2runtime.js"></script>
+    This file will have been minified and obfuscated if you enabled "Minify script" during export.
+	<script src="c2runtime.js"></script> -->
 
     <script>
 		// Size the canvas to fill the browser viewport.
@@ -66,10 +104,4 @@
 		document.addEventListener("mozvisibilitychange", onVisibilityChanged, false);
 		document.addEventListener("webkitvisibilitychange", onVisibilityChanged, false);
 		document.addEventListener("msvisibilitychange", onVisibilityChanged, false);
-		
-		if (navigator.serviceWorker && navigator.serviceWorker.register)
-		{
-			// Register an empty service worker to trigger web app install banners.
-			navigator.serviceWorker.register("sw.js", { scope: "./" });
-		}
     </script>
