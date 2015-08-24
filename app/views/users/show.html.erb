@@ -13,12 +13,12 @@
 <h3><%= link_to('Leaderboard', '/game/leaderboard')  %>  </h3>
 
 <h2>Your score: <%= @user.total %> </h2>
-
+<%= javascript_include_tag "https://www.google.com/jsapi", "chartkick" %>
 <a href="/game/play">Play a new game</a><br>
-<div class="recent-games" style="display:block;width:800px;height:450px; overflow: scroll;">
+<div class="recent-games" > <!-- style="display:block;width:800px;height:450px; overflow: scroll;"-->
 	<% @user_games.each do |game|%>
-		<div style="background-color:lightgrey;display:inline-block;float:left;margin:1%" class="game-entry">
-			<div class="game-date">
+		<div style="background-color:lightgrey" class="game-entry"> <!-- ;display:inline-block;float:left;margin:1%-->
+			<div class="game-data">
 				<p>Game ID: <%= game.id %> </p>
 				<p>Player: <%= User.get_username_of(game[:user_id]) %> </p>
 				<p>Created at: <%= game.created_at %> </p>
@@ -26,12 +26,21 @@
 				<p>Score: <%= number_with_precision(game.score, precision: 0) %> </p>
 				<p>Damage Taken: <%= number_with_precision(game.damage_taken, precision: 0) %> </p>
 				<p>Damage Inflicted: <%= number_with_precision(game.damage_inflicted, precision: 0) %> </p>
-				<p>Laser Time: <%= number_with_precision(game.laser_time, precision: 0) %> </p>
-				<p>Super laser Time: <%= number_with_precision(game.slaser_time, precision: 0) %> </p>
-				<p>Machine Gun Time: <%= number_with_precision(game.mg_time, precision: 0) %> </p>
-				<p>HE Rocket time: <%= number_with_precision(game.rocket_time, precision: 0) %> </p>
-				<p>Mine time: <%= number_with_precision(game.mine_time, precision: 0) %> </p>
+				<div class="weapon-use-chart" style="width:500px;height:250px;display:inline-block">
+					<%= pie_chart({
+						"Laser" => number_with_precision(game.laser_time, precision: 0),
+						"Super Laser" => number_with_precision(game.slaser_time, precision: 0),
+						"Machine Gun" => number_with_precision(game.mg_time, precision: 0)
+					}, library: {title: "Primary Weapon Use"}) %>
+				</div>
+				<div class="weapon-use-chart" style="width:500px;height:250px;display:inline-block">
+					<%= pie_chart({
+						"HE Rocket" => number_with_precision(game.rocket_time, precision: 0),
+						"Mine" => number_with_precision(game.mine_time, precision: 0),
+					}, library: {title: "Secondary Weapon Use"}) %>
+				</div>
 			</div>
+			<div class="clearfix" style="display:block;clear:both;visibility:none">.</div>
 		</div>
 	<% end %>
 </div>
