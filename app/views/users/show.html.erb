@@ -1,4 +1,8 @@
 <%= javascript_include_tag "https://www.google.com/jsapi", "chartkick" %>
+
+<% if @user.avatar %>
+	<%= image_tag @user.avatar.url(:thumb) %>
+<% end %>
 <%= @user.username %> is logged in
 <br>
 <% if user_signed_in? %>
