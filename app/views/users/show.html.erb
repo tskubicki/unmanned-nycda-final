@@ -10,6 +10,10 @@
   </li>
 <% end %>
 
+<h3><%= link_to('Leaderboard', '/game/leaderboard')  %>  </h3>
+
+<h2>Your score: <%= @user.total %> </h2>
+
 <a href="/game/play">Play a new game</a><br>
 <div class="recent-games" style="display:block;width:800px;height:450px; overflow: scroll;">
 	<% @user_games.each do |game|%>

@@ -1,11 +1,11 @@
 class GameController < ApplicationController
   def play
   end
+
   def create
   	@gamedata = JSON.parse(params[:game_data]) #
   	@game = Game.new(
   		user_id: current_user.id,
-      skill: eval_skill(@gamedata["game_time"], @gamedata["damage_taken"]),
   		game_time: @gamedata["game_time"],
   		score: @gamedata["score"],
   		damage_taken: @gamedata["damage_taken"],
@@ -17,7 +17,9 @@ class GameController < ApplicationController
   		mine_time: @gamedata["mine_time"],
     )
   	if @game.save
-  		#success
+      #success
+      users_to_update = User.find(current_user.id)
+      users_to_update.update(total: users_to_update.total + @gamedata["score"])
   		redirect_to user_path(current_user.id)
   	else
   		#fail
@@ -25,10 +27,8 @@ class GameController < ApplicationController
   	end
   end
 
-  private
-  def eval_skill(input_time, input_damage)
-    (input_time / input_damage) * 100
+  def leaderboard
+    @users = User.all().order(total: :desc)
   end
-
 
 end
