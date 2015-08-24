@@ -21,6 +21,7 @@ class UsersController < ApplicationController
 	def show
 		@user = current_user
 		@user_games = Game.where(user_id: current_user.id).order(created_at: :desc)
+		@last_game = @user_games.first
 
 	end
 	
