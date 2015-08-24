@@ -19,10 +19,10 @@ class UsersController < ApplicationController
 	end
 	
 	def show
-		@user = current_user
-		@user_games = Game.where(user_id: current_user.id).order(created_at: :desc)
+		@user = User.find(params[:id])
+		@user_games = Game.where(user_id: @user.id).order(created_at: :desc)
 		@last_game = @user_games.first
-
+		@friends = @user.friends
 	end
 	
 	def update #patch / put

@@ -1,7 +1,7 @@
 <%= javascript_include_tag "https://www.google.com/jsapi", "chartkick" %>
 
 <% if @user.avatar %>
-	<%= image_tag @user.avatar.url(:thumb) %>
+	<%= image_tag @user.avatar.url(:thumb) %><br>
 <% end %>
 <%= @user.username %> is logged in
 <br>
@@ -81,3 +81,14 @@
 <% else %>
 	<p> You havent played any games yet. Click on the instant action button to begin! </p>
 <% end %>
+
+<div class="friends-list" >
+	<h2>Friends</h2>
+	<% @friends.each do |f| %>
+		<p>
+		  <%= image_tag f.avatar.url(:thumb) %> 
+		  <%= f.username %>
+		  <%= link_to "Profile", user_path(f.id) %>
+		</p>
+	<% end %>
+</div>

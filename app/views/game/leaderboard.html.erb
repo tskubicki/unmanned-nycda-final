@@ -1,4 +1,4 @@
 <h2>Top pilots</h2>
 <% @users.each do |u| %>
-	<p><%= u.username %> <%= u.total %></p>
+	<p><%= image_tag u.avatar.url(:thumb) %> <%= u.username %> <%= u.total %></p>
 <% end %>
