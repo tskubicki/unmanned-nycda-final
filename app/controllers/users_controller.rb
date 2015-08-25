@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	include UsersHelper
+	include ApplicationHelper
 	before_action :check_for_login
 
 	def index
@@ -8,19 +8,26 @@ class UsersController < ApplicationController
 	    else
 	      @users = User.all
 	    end
-		
 	end
 
 	def create #post
-		@user = User.new()
 	end
 	
 	def new
+		boot_non_admins
 		@user = User.new()
 	end
 	
 	def edit
 		@user = User.new()
+	end
+
+	def update
+		#devise will reject changes if blank password fields are passed in the params
+		if params[:user][:password].blank?
+			params[:user].delete(:password)
+			params[:user].delete(:password_confirmation)
+		end
 	end
 	
 	def show
@@ -50,4 +57,8 @@ class UsersController < ApplicationController
 		end
 	end
 
+	private
+	def user_params
+	  params.require(:user).permit(:email, :username, :password, :password_confirmation, :avatar)
+	end
 end

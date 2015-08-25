@@ -1,7 +1,31 @@
 class AdminController < ApplicationController
-  before_action :boot_non_admins # boots you to the main page if you lack admin 
+  include ApplicationHelper
+  before_action :boot_non_admins 
 
   def users
+    if params[:search]
+      @users = User.where("username like ?", "%#{params[:search]}%")
+    else
+      @users = User.all
+    end
+  end
+
+  def get_create_user
+    @user = User.new()
+  end
+
+  def post_create_user
+    @user = User.new(user_params)
+    @user.save
+  end
+
+  def get_change_user
+  end
+
+  def post_change_user
+  end
+
+  def destroy_user
   end
 
   def friends
@@ -17,6 +41,7 @@ class AdminController < ApplicationController
   end
 
   def main
+
   end
 
   private
