@@ -1,5 +1,17 @@
 Rails.application.routes.draw do
 
+  get 'admin/users'
+
+  get 'admin/friends'
+
+  get 'admin/messages'
+
+  get 'admin/roles'
+
+  get 'admin/games'
+
+  get 'admin/main'
+
   get 'game/play'
   get 'game/leaderboard'
   post 'game/create'
