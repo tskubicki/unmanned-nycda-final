@@ -3,7 +3,12 @@ class UsersController < ApplicationController
 	before_action :check_for_login
 
 	def index
-		@users = User.all
+		if params[:search]
+	      @users = User.where("username like ?", "%#{params[:search]}%")
+	    else
+	      @users = User.all
+	    end
+		
 	end
 
 	def create #post
@@ -24,6 +29,7 @@ class UsersController < ApplicationController
 		@user_games = Game.where(user_id: @user.id).order(created_at: :desc)
 		@last_game = @user_games.first
 		@friends = @user.friends
+		@isfriend = Friendship.where(user_id: current_user.id, friend_id: @user.id).exists?
 	end
 	
 	def update #patch / put

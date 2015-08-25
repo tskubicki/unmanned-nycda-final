@@ -45,8 +45,8 @@ ActiveRecord::Schema.define(version: 20150823231654) do
 
   create_table "roles", force: :cascade do |t|
     t.integer  "user_id"
-    t.boolean  "is_user"
-    t.boolean  "is_admin"
+    t.boolean  "is_user",          default: false
+    t.boolean  "is_admin",          default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
