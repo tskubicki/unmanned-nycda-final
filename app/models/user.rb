@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   validates :username, uniqueness: true, presence: true
+  after_create :create_roles_table_entry
 
   has_many :friendships
   has_many :friends, :through => :friendships
@@ -22,4 +23,10 @@ class User < ActiveRecord::Base
     def self.get_username_of(input_id)
       User.find(input_id).username
     end
+
+  private
+  def create_roles_table_entry
+    Role.create(user_id: self.id, is_user: true, is_admin: false)
+  end
+  
 end
