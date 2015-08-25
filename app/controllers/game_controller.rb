@@ -28,7 +28,11 @@ class GameController < ApplicationController
   end
 
   def leaderboard
-    @users = User.all().order(total: :desc)
+
+    @global_leaderboard = User.all.order(total: :desc)
+    ids = [current_user.id] + current_user.friends.pluck(:id) 
+    @friends_leaderboard = User.where(id: ids).order(total: :desc)
+
   end
 
 end

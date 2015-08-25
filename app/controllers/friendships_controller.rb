@@ -5,9 +5,10 @@ class FriendshipsController < ApplicationController
 	end
 
 	def create #post
-		@friendship = Friendship.new()
-		if @friendship.create(friendship_params)
+		@friendship = Friendship.new(friendship_params)
+		if @friendship.save
 			#success
+			redirect_to user_path(current_user)
 		else
 			#fail
 		end

@@ -18,10 +18,16 @@
 <h3> <%= link_to('Leaderboard', '/game/leaderboard') %> </h3>
 <h3> <%= link_to('Edit profile', edit_user_registration_path) %></h3>
 
+<%= form_for @friendship do |f| %>
+	<%= f.hidden_field :user_id, value: current_user.id %>
+	<%= f.hidden_field :friend_id, value: @user.id %>
+	<%= f.submit :add_friend %>
+<% end %>
+
 <h2>Your score: <%= @user.total %> </h2>
 
 <a href="/game/play">Play a new game</a><br>
-<% if @user_games %>
+<% if @user_games.length > 0 %>
 	<h2>Your last game: </h2>
 	<div class="last-game">
 		<div style="background-color:lightgrey" class="game-entry">
@@ -49,35 +55,37 @@
 			<div class="clearfix" style="display:block;clear:both;visibility:none">.</div>
 		</div>
 	</div>
-<h2>Recent Games</h2>
-<div class="recent-games" > <!-- style="display:block;width:800px;height:450px; overflow: scroll;"-->
-	<% @user_games.offset(1).each do |game|%>
-		<div style="background-color:lightgrey" class="game-entry"> <!-- ;display:inline-block;float:left;margin:1%-->
-			<div class="game-data">
-				<p>Game ID: <%= game.id %> </p>
-				<p>Date: <%= game.created_at %> </p>
-				<p>Game length: <%= number_with_precision(game.game_time, precision: 2) %> seconds </p>
-				<p>Score: <%= number_with_precision(game.score, precision: 0) %> </p>
-				<p>Damage Taken: <%= number_with_precision(game.damage_taken, precision: 0) %> </p>
-				<p>Damage Inflicted: <%= number_with_precision(game.damage_inflicted, precision: 0) %> </p>
-				<div class="weapon-use-chart" style="width:500px;height:250px;display:inline-block">
-					<%= pie_chart({
-						"Laser" => number_with_precision(game.laser_time, precision: 0),
-						"Super Laser" => number_with_precision(game.slaser_time, precision: 0),
-						"Machine Gun" => number_with_precision(game.mg_time, precision: 0)
-					}, library: {title: "Primary Weapon Use"}) %>
+	<% if @user_games.length > 1 %>
+		<h2>Recent Games</h2>
+		<div class="recent-games" > <!-- style="display:block;width:800px;height:450px; overflow: scroll;"-->
+			<% @user_games.offset(1).each do |game|%>
+				<div style="background-color:lightgrey" class="game-entry"> <!-- ;display:inline-block;float:left;margin:1%-->
+					<div class="game-data">
+						<p>Game ID: <%= game.id %> </p>
+						<p>Date: <%= game.created_at %> </p>
+						<p>Game length: <%= number_with_precision(game.game_time, precision: 2) %> seconds </p>
+						<p>Score: <%= number_with_precision(game.score, precision: 0) %> </p>
+						<p>Damage Taken: <%= number_with_precision(game.damage_taken, precision: 0) %> </p>
+						<p>Damage Inflicted: <%= number_with_precision(game.damage_inflicted, precision: 0) %> </p>
+						<div class="weapon-use-chart" style="width:500px;height:250px;display:inline-block">
+							<%= pie_chart({
+								"Laser" => number_with_precision(game.laser_time, precision: 0),
+								"Super Laser" => number_with_precision(game.slaser_time, precision: 0),
+								"Machine Gun" => number_with_precision(game.mg_time, precision: 0)
+							}, library: {title: "Primary Weapon Use"}) %>
+						</div>
+						<div class="weapon-use-chart" style="width:500px;height:250px;display:inline-block">
+							<%= pie_chart({
+								"HE Rocket" => number_with_precision(game.rocket_time, precision: 0),
+								"Mine" => number_with_precision(game.mine_time, precision: 0),
+							}, library: {title: "Secondary Weapon Use"}) %>
+						</div>
+					</div>
+					<div class="clearfix" style="display:block;clear:both;visibility:none">.</div>
 				</div>
-				<div class="weapon-use-chart" style="width:500px;height:250px;display:inline-block">
-					<%= pie_chart({
-						"HE Rocket" => number_with_precision(game.rocket_time, precision: 0),
-						"Mine" => number_with_precision(game.mine_time, precision: 0),
-					}, library: {title: "Secondary Weapon Use"}) %>
-				</div>
-			</div>
-			<div class="clearfix" style="display:block;clear:both;visibility:none">.</div>
+			<% end %>
 		</div>
 	<% end %>
-</div>
 <% else %>
 	<p> You havent played any games yet. Click on the instant action button to begin! </p>
 <% end %>
