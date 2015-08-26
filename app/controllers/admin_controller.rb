@@ -10,13 +10,23 @@ class AdminController < ApplicationController
     end
   end
 
-  def get_create_user
+  def user_new
     @user = User.new()
   end
 
-  def post_create_user
+  def user_create
     @user = User.new(user_params)
     @user.save
+    redirect_to user_path(current_user)
+  end
+
+  def user_edit
+    @user = User.find(params[:id])
+  end
+
+  def user_update
+   @user = User.find(params[:id])
+   @user.update(user_params)
   end
 
   def get_change_user
@@ -49,5 +59,9 @@ class AdminController < ApplicationController
     if !current_user || current_user.role.is_admin == false
       redirect_to root_path 
     end
+  end
+
+  def user_params
+    params.require(:user).permit(:email, :username, :password, :password_confirmation, :avatar)
   end
 end
