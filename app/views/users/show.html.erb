@@ -22,17 +22,19 @@
 <h3> <%= link_to('Leaderboard', '/game/leaderboard') %> </h3>
 <h3> <%= link_to('Edit profile', edit_user_registration_path) %></h3>
 
-<% if @isfriend %>
-	<p><%= @user.username %> is your friend</p>
-<% else %>
-	<%= form_for @friendship do |f| %>
-		<%= f.hidden_field :user_id, value: current_user.id %>
-		<%= f.hidden_field :friend_id, value: @user.id %>
-		<%= f.submit :add_friend %>
+<% if current_user.id != @user.id %>
+	<% if @isfriend %>
+		<p>You are friends with <%= @user.username %></p>
+	<% else %>
+		<%= form_for @friendship do |f| %>
+			<%= f.hidden_field :user_id, value: current_user.id %>
+			<%= f.hidden_field :friend_id, value: @user.id %>
+			<%= f.submit :add_friend %>
+		<% end %>
 	<% end %>
 <% end %>
 
-<h2>Your score: <%= @user.total %> </h2>
+<h2>Your lifetime total score: <%= @user.total %> </h2>
 
 <a href="/game/play">Play a new game</a><br>
 <% if @user_games.length > 0 %>

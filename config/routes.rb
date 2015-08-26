@@ -1,18 +1,14 @@
 Rails.application.routes.draw do
 
+  get 'admin/main'
   get 'admin/friends'
   get 'admin/messages'
   get 'admin/roles'
   get 'admin/games'
-  get 'admin/main'
 
   namespace :admin do
     resources :users
   end
-  
-
-  # get 'admin/update_user/:id' => 'admin#update_user'
-  # patch 'admin/update_user' => 'admin#apply_updates_to_user'
 
   get 'game/play'
   get 'game/leaderboard'

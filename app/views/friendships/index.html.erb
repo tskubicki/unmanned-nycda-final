@@ -1,7 +1,5 @@
-<% @users.each do |u| %>
+<% @friendships.each do |f| %>
 	<p>
-		<%= image_tag u.avatar.url(:thumb) %>
-		<%= u.username %>
-		<%= link_to "Add Friend", user_path(f.id) %>
+		<%= f.user.username %> is friends with <%= f.friend.username %>
 	</p>
 <% end %>
