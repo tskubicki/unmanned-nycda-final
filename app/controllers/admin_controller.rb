@@ -3,11 +3,7 @@ class AdminController < ApplicationController
   before_action :boot_non_admins 
 
   def users
-    if params[:search]
-      @users = User.where("username like ?", "%#{params[:search]}%")
-    else
-      @users = User.all
-    end
+    
   end
 
   def user_new

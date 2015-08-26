@@ -1,5 +1,9 @@
 <%= javascript_include_tag "https://www.google.com/jsapi", "chartkick" %>
 
+<% if @user.role.is_admin %>
+	<%= link_to('Admin Panel', admin_main_path,) %>  
+<% end %>
+<br>
 <% if @user.avatar %>
 	<%= image_tag @user.avatar.url(:thumb) %><br>
 <% end %>

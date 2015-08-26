@@ -1,1 +1,20 @@
-IM A LOL
+<%= link_to "Create new user", new_admin_user_path %>
+
+<%= form_tag(admin_users_path, :method => "get") do %>
+      <%= text_field_tag :search, params[:search], placeholder: "Search" %>
+      <%= submit_tag :search_users %>
+<% end %>
+
+<% @users.each do |u| %>
+	<p>
+		<%= image_tag u.avatar.url(:thumb) %>
+		<%= u.username %>
+		<%= u.email %>
+		<%= link_to "Go to Profile", user_path(u) %>
+		<%= link_to "Change", edit_admin_user_path(u) %>
+		<%= link_to "Destroy",
+			 admin_user_path(u),
+			 method: :delete,
+			 data: { confirm: "Destroy #{u.username}? This cannot be undone!" } %>
+	</p>
+<% end %>

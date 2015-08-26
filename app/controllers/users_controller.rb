@@ -28,6 +28,7 @@ class UsersController < ApplicationController
 			params[:user].delete(:password)
 			params[:user].delete(:password_confirmation)
 		end
+		
 	end
 	
 	def show
