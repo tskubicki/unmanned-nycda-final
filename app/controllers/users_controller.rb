@@ -23,17 +23,13 @@ class UsersController < ApplicationController
 	end
 
 	def update
-		#devise will reject changes if blank password fields are passed in the params
-		if params[:user][:password].blank?
-			params[:user].delete(:password)
-			params[:user].delete(:password_confirmation)
-		end
-		
 	end
 	
 	def show
-		@friendship = Friendship.new()
 		@user = User.find(params[:id])
+		@friendship = Friendship.new()
+		@message = Message.new()
+		@messages = Message.where(user_id: @user.id)
 		@user_games = Game.where(user_id: @user.id).order(created_at: :desc)
 		@last_game = @user_games.first
 		@friends = @user.friends
