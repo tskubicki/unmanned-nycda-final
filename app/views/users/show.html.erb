@@ -111,7 +111,7 @@
 	<% end %>
 </div>
 
-<div class="new-message-container" style="background-color: beige">
+<div class="new-message-container" style="background-color: yellow">
 	<% if @user.errors.any? %>
 	    <div id="error_explanation">
 		    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -127,7 +127,7 @@
 		<%= m.hidden_field :sender_id, value: current_user.id %>
 		<%= m.hidden_field :user_id, value: @user.id %>
 		<div class="field">
-			<%= m.label "Write a message for #{@user.username}" %><br />
+			<%= m.label "Write a message to #{@user.username}" %><br />
 			<%= m.text_area :content, autofocus: true %>
 		</div>
 

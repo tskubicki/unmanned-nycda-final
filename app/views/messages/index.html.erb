@@ -1,2 +1,14 @@
-<h1>Messages#index</h1>
-<p>Find me in app/views/messages/index.html.erb</p>
+<h2><%= link_to('Back to admin main', admin_main_path) %> </h2>
+
+<h1>Messages Admin</h1>
+
+<% @messages.each do |m| %>
+	From: <%= m.sender.username %><br>
+	To:<%= m.user.username %><br>
+	<%= m.content %><br>
+	<%= link_to "Change Message", edit_message_path(m)%>
+	<br>
+	<%= link_to "Delete Message", message_path(m), method: :delete,
+			 data: { confirm: "Destroy this message?" }%><br><br>
+<% end %>
+

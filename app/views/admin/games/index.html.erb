@@ -13,6 +13,7 @@
 		<%= g.mg_time %>
 		<%= g.rocket_time %>
 		<%= g.mine_time %>
-		<%= link_to('Delete', admin_game_path(g), method: :delete) %> 
+		<%= link_to('Delete', admin_game_path(g), method: :delete,
+			 data: { confirm: "Destroy this game?" }) %> 
 	</p>
 <% end %>

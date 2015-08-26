@@ -53,12 +53,6 @@ class Admin::UsersController < ApplicationController
 	end
 	
 	def show
-		# @friendship = Friendship.new()
-		# @user = User.find(params[:id])
-		# @user_games = Game.where(user_id: @user.id).order(created_at: :desc)
-		# @last_game = @user_games.first
-		# @friends = @user.friends
-		# @isfriend = Friendship.where(user_id: current_user.id, friend_id: @user.id).exists?
 	end
 	
 	

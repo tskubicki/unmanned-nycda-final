@@ -1,2 +1,15 @@
-<h1>Messages#edit</h1>
-<p>Find me in app/views/messages/edit.html.erb</p>
+<%= form_for @message, method: :patch do |m| %>
+	<p>The message came from "<%= @message.sender.username %>", who has the ID# "<%= @message.sender_id %>"</p>
+	<p>The message was sent to "<%= @message.user.username %>", who has the ID# "<%= @message.user_id %>"</p>
+	
+	<%= m.label "From:" %><br />
+	<%= m.text_field :sender_id %><br />
+
+	<%= m.label "To:" %><br />
+	<%= m.text_field :user_id %><br />
+
+	<%= m.label "Message content:" %><br />
+	<%= m.text_area :content %><br />
+	
+	<%= m.submit "Submit" %><br />
+<% end %>
