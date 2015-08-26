@@ -3,11 +3,11 @@ Rails.application.routes.draw do
   get 'admin/main'
   get 'admin/friends'
   get 'admin/messages'
-  get 'admin/roles'
-  get 'admin/games'
 
   namespace :admin do
     resources :users
+    resources :roles, only: [:index, :update]
+    resources :games, only: [:index, :destroy]
   end
 
   get 'game/play'

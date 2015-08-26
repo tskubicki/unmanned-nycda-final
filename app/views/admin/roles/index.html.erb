@@ -1,0 +1,32 @@
+<h2><%= link_to('Back to admin main', admin_main_path) %> </h2>
+
+<h1> Admins </h1>
+<% @admins.each do |a| %>
+	<% if a.role && a.role.is_admin %>
+		<p>
+			<%= image_tag a.avatar.url(:thumb) %>
+			<%= a.id %>
+			<%= a.username %>
+			<%= a.email %>
+			<%= link_to "Demote from admin", admin_role_path(a), method: :patch %>
+		</p>
+	<% end %>
+<% end %>
+
+<%= form_tag(admin_roles_path, :method => "get") do %>
+      <%= text_field_tag :search, params[:search], placeholder: "Search" %>
+      <%= submit_tag :search_users %>
+<% end %>
+
+<h1> Non-admins </h1>
+<% @users.each do |u| %>
+	<% if  u.role && !u.role.is_admin %>
+		<p>
+			<%= image_tag u.avatar.url(:thumb) %>
+			<%= u.id %>
+			<%= u.username %>
+			<%= u.email %>
+			<%= link_to "Promote to admin", admin_role_path(u), method: :patch  %>
+		</p>
+	<% end %>
+<% end %>

@@ -1,8 +1,7 @@
-<h1>Admin#main</h1>
-<p>Find me in app/views/admin/main.html.erb</p>
+<h3><%= link_to('Go back to your profile', user_path(current_user)) %> </h3> <br>
 
-<%= link_to('User Administration', admin_users_path,) %>  <br>
-<%= link_to('Friend Administration', friendships_path,) %><br>
-<%= link_to('Roles Administration', admin_roles_path,) %>  <br>
-<%= link_to('Games Administration', admin_games_path,) %>  <br>
-<%= link_to('Messages Administration', admin_messages_path,) %>  <br>
+<h1> Admin Functions </h1>
+<%= link_to('User Administration', admin_users_path) %>  <br>
+<%= link_to('Friend Administration', friendships_path) %><br>
+<%= link_to('Roles Administration', admin_roles_path) %>  <br>
+<%= link_to('Games Administration', admin_games_path) %>  
