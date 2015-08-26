@@ -4,9 +4,9 @@ class User < ActiveRecord::Base
   validates :username, uniqueness: true, presence: true
   after_create :create_roles_table_entry
 
-  has_many :friendships
+  has_many :friendships, dependent: :destroy
   has_many :friends, :through => :friendships
-  has_one :role
+  has_one :role, dependent: :destroy
   has_many :games
   has_many :messages
 

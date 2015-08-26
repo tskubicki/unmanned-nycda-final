@@ -1,5 +1,13 @@
+<%= link_to "Create new friendship", new_friendship_path %>
+
 <% @friendships.each do |f| %>
+	<% if f.user && f.friend %>
 	<p>
 		<%= f.user.username %> is friends with <%= f.friend.username %>
+		<%= link_to "Destroy",
+			 friendship_path(f),
+			 method: :delete,
+			 data: { confirm: "Destroy this friendship?" } %>
 	</p>
+	<% end %>
 <% end %>

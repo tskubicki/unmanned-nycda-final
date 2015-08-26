@@ -1,4 +1,8 @@
 class FriendshipsController < ApplicationController
+	include ApplicationHelper
+	
+	before_action :boot_non_admins
+	skip_before_action :boot_non_admins, only: [:create]
 
 	def index
 		@friendships = Friendship.all
@@ -8,9 +12,9 @@ class FriendshipsController < ApplicationController
 		@friendship = Friendship.new(friendship_params)
 		if @friendship.save
 			#success
-			redirect_to user_path(current_user)
+			redirect_to friendships_path
 		else
-			#fail
+			redirect_to new_friendship_path(@friendship)
 		end
 	end
 	
@@ -42,6 +46,7 @@ class FriendshipsController < ApplicationController
 		else
 			#fail
 		end
+		redirect_to friendships_path
 	end
 
 	private
