@@ -110,3 +110,37 @@
 		</p>
 	<% end %>
 </div>
+
+<div class="new-message-container" style="background-color: beige">
+	<% if @user.errors.any? %>
+	    <div id="error_explanation">
+		    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+		    <ul>
+			    <% @user.errors.full_messages.each do |msg| %>
+			    	<li><%= msg %></li>
+			    <% end %>
+		    </ul>
+	    </div>
+	<% end %>
+	<%= form_for @message do |m| %>
+		
+		<%= m.hidden_field :sender_id, value: current_user.id %>
+		<%= m.hidden_field :user_id, value: @user.id %>
+		<div class="field">
+			<%= m.label "Write a message for #{@user.username}" %><br />
+			<%= m.text_area :content, autofocus: true %>
+		</div>
+
+		<div class="actions">
+		    <%= m.submit "Submit" %>
+		</div>
+	<% end %>
+</div>
+
+<h2>Your wall</h2>
+<div class="wall-container" style="background-color: teal">
+	<% @messages.each do |m| %>
+		<%= m.sender.username %><br>
+		<%= m.content %><br><br>
+	<% end %>
+</div>

@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
-
   get 'admin/main'
   get 'admin/friends'
-  get 'admin/messages'
 
   namespace :admin do
     resources :users
