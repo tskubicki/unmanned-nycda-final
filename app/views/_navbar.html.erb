@@ -1,0 +1,43 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  	<div class="container-fluid">
+		<a class="nav navbar-nav" href="/"><%= image_tag "title.png" %></a>  
+
+		<% if user_signed_in? %>
+			<ul class="nav navbar-nav">
+		        <li class="active"><%=link_to('Players',users_path)%></li>
+		        <li class="dropdown">
+		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Leaderboards <span class="caret"></span></a>
+		          <ul class="dropdown-menu">
+		            <li><%=link_to('Global Leaderboard',game_leaderboard_path)%></li>
+		            <li><%=link_to('Friends Leaderboard',game_friends_leaderboard_path)%></li>
+		          </ul>
+		        </li>
+	      </ul>
+
+	    <% end %>
+
+		<ul class="nav navbar-nav navbar-right space-out-buttons" style="margin-right: 0.5%">
+			<% if user_signed_in? %>
+			  <li>
+			  	<button type="button" class="btn btn-success navbar-btn link-text-white"><strong><%=link_to('Play!',game_play_path)%></strong></button>
+			  </li>	
+			  <li>
+			  	<button type="button" class="btn btn-info navbar-btn link-text-white"><%=link_to('Your Profile',new_user_session_path)%></button>
+			  </li>
+			  <% if user_signed_in? && current_user.role.is_admin %>
+				  <li>
+				  	<button type="button" class="btn btn-warning navbar-btn link-text-white"><%=link_to('Admin', admin_main_path)%></button>
+				  </li>		
+			  <% end %>
+			  <li>
+			  	<button type="button" class="btn btn-danger navbar-btn link-text-white"><%=link_to "Logout #{current_user.username}", destroy_user_session_path,method: :delete%></button>
+			  </li>
+			<% else %>
+			  <li>
+			  	<button type="button" class="btn btn-success navbar-btn link-text-white"><%=link_to('Login',new_user_session_path)%></button>
+			  </li>			  
+			<% end %>
+		</ul>
+	</div>
+</nav>
+<div class="make-room-for-nav"></div>

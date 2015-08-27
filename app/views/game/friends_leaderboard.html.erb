@@ -1,5 +1,5 @@
 <%= render partial: "/navbar" %>
-<h2>Global Leaderboard</h2>
-<% @global_leaderboard.each_with_index do |u, count| %>
+<h2>Friends leaderboard</h2>
+<% @friends_leaderboard.each_with_index do |u, count| %>
 	<p><%=count + 1%> <%= image_tag u.avatar.url(:thumb) %> <%= u.username %> <%= u.total %></p>
 <% end %>

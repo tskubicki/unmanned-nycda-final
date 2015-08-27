@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   get 'game/play'
   get 'game/leaderboard'
+  get 'game/friends_leaderboard'
   post 'game/create'
 
   get 'landing/index'
