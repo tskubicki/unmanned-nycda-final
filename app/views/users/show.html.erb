@@ -31,7 +31,7 @@
 	<% if @user_games.length > 0 %>
 		<h3 style="text-align:center">Most recent game:</h3>
 		<div class="last-game">
-			<%= render partial: "game_entry", locals: {game: @last_game} %>
+			<%= render partial: "game_entry", locals: {game: @last_game.first} %>
 		</div>
 		<% if @user_games.length > 1 %>
 			<h3 style="text-align:center">Past games:</h3>

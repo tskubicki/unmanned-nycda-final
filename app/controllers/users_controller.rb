@@ -30,8 +30,8 @@ class UsersController < ApplicationController
 		@friendship = Friendship.new()
 		@message = Message.new()
 		@messages = Message.where(user_id: @user.id)
-		@user_games = Game.where(user_id: @user.id).order(created_at: :desc)
-		@last_game = @user_games.first
+		@last_game = Game.where(user_id: @user.id).limit(1).order(created_at: :desc)
+		@user_games = Game.where(user_id: @user.id).offset(1).limit(5).order(created_at: :desc)
 		@friends = @user.friends
 		@isfriend = Friendship.where(user_id: current_user.id, friend_id: @user.id).exists?
 	end
