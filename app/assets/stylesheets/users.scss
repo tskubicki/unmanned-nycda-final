@@ -24,3 +24,23 @@
 	margin-bottom: 5px;
 }
 
+
+
+.game-entry{
+	width:80%;
+	margin: 0 auto;
+	border: 5px solid darkgrey;
+	border-radius:5px;
+}
+
+.game-data{
+	color: #fff;
+}
+
+clearfix{
+	width:100%;
+	height:1px;
+	display:block;
+	clear:both;
+	visibility:none
+}

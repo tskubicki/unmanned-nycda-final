@@ -1,0 +1,30 @@
+<div class="game-entry" >
+	<div class="game-data col-md-2">
+		<p>Game ID: <%= game.id %> </p>
+		<p>Date: <%= game.created_at %> </p>
+		<p>Game length: <%= number_with_precision(game.game_time, precision: 2) %> seconds </p>
+		<p>Score: <%= number_with_precision(game.score, precision: 0) %> </p>
+		<p>Damage Taken: <%= number_with_precision(game.damage_taken, precision: 0) %> </p>
+		<p>Damage Inflicted: <%= number_with_precision(game.damage_inflicted, precision: 0) %> </p>
+	</div>
+	<div class="weapon-use-chart col-md-5">
+		<%= pie_chart({
+			"Laser" => number_with_precision(game.laser_time, precision: 0),
+			"Super Laser" => number_with_precision(game.slaser_time, precision: 0),
+			"Machine Gun" => number_with_precision(game.mg_time, precision: 0)
+		}, library: {title: "Primary Weapon Use",
+		             backgroundColor: "#000",
+		             legend: {textStyle: {color: '#fff'}},
+					 titleTextStyle: { color: '#FFF' } }) %>
+	</div>
+	<div class="weapon-use-chart col-md-5">
+		<%= pie_chart({
+			"HE Rocket" => number_with_precision(game.rocket_time, precision: 0),
+			"Mine" => number_with_precision(game.mine_time, precision: 0),
+		}, library: {title: "Secondary Weapon Use",
+		             backgroundColor: "#000",
+		             legend: {textStyle: {color: '#fff'}},
+					 titleTextStyle: { color: '#FFF' } }) %>
+	</div>
+	<div class="clearfix" style="">.</div>
+</div>

@@ -27,67 +27,17 @@
 			  </div>
 			</div>
 		</div>
-
-
 	</div>
 	<% if @user_games.length > 0 %>
-		<h2>Last game played: </h2>
+		<h3 style="text-align:center">Most recent game:</h3>
 		<div class="last-game">
-			<div style="background-color:lightgrey" class="game-entry">
-				<div class="game-data">
-					<p>Game ID: <%= @last_game.id %> </p>
-					<p>Date: <%= @last_game.created_at %> </p>
-					<p>Game length: <%= number_with_precision(@last_game.game_time, precision: 2) %> seconds </p>
-					<p>Score: <%= number_with_precision(@last_game.score, precision: 0) %> </p>
-					<p>Damage Taken: <%= number_with_precision(@last_game.damage_taken, precision: 0) %> </p>
-					<p>Damage Inflicted: <%= number_with_precision(@last_game.damage_inflicted, precision: 0) %> </p>
-					<div class="weapon-use-chart" style="width:500px;height:250px;display:inline-block">
-						<%= pie_chart({
-							"Laser" => number_with_precision(@last_game.laser_time, precision: 0),
-							"Super Laser" => number_with_precision(@last_game.slaser_time, precision: 0),
-							"Machine Gun" => number_with_precision(@last_game.mg_time, precision: 0)
-						}, library: {title: "Primary Weapon Use"}) %>
-					</div>
-					<div class="weapon-use-chart" style="width:500px;height:250px;display:inline-block">
-						<%= pie_chart({
-							"HE Rocket" => number_with_precision(@last_game.rocket_time, precision: 0),
-							"Mine" => number_with_precision(@last_game.mine_time, precision: 0),
-						}, library: {title: "Secondary Weapon Use"}) %>
-					</div>
-				</div>
-				<div class="clearfix" style="display:block;clear:both;visibility:none">.</div>
-			</div>
+			<%= render partial: "game_entry", locals: {game: @last_game} %>
 		</div>
 		<% if @user_games.length > 1 %>
-			<h2>Recent Games</h2>
-			<div class="recent-games" > 
-				<% @user_games.offset(1).each do |game|%>
-					<div style="background-color:lightgrey" class="game-entry"> 
-						<div class="game-data">
-							<p>Game ID: <%= game.id %> </p>
-							<p>Date: <%= game.created_at %> </p>
-							<p>Game length: <%= number_with_precision(game.game_time, precision: 2) %> seconds </p>
-							<p>Score: <%= number_with_precision(game.score, precision: 0) %> </p>
-							<p>Damage Taken: <%= number_with_precision(game.damage_taken, precision: 0) %> </p>
-							<p>Damage Inflicted: <%= number_with_precision(game.damage_inflicted, precision: 0) %> </p>
-							<div class="weapon-use-chart" style="width:500px;height:250px;display:inline-block">
-								<%= pie_chart({
-									"Laser" => number_with_precision(game.laser_time, precision: 0),
-									"Super Laser" => number_with_precision(game.slaser_time, precision: 0),
-									"Machine Gun" => number_with_precision(game.mg_time, precision: 0)
-								}, library: {title: "Primary Weapon Use"}) %>
-							</div>
-							<div class="weapon-use-chart" style="width:500px;height:250px;display:inline-block">
-								<%= pie_chart({
-									"HE Rocket" => number_with_precision(game.rocket_time, precision: 0),
-									"Mine" => number_with_precision(game.mine_time, precision: 0),
-								}, library: {title: "Secondary Weapon Use"}) %>
-							</div>
-						</div>
-						<div class="clearfix" style="display:block;clear:both;visibility:none">.</div>
-					</div>
-				<% end %>
-			</div>
+			<h3 style="text-align:center">Past games:</h3>
+			<% @user_games.each do |game| %>
+				<%= render partial: "game_entry", locals: {game: game} %>
+			<% end %>
 		<% end %>
 	<% else %>
 		<p> You havent played any games yet. Click on the "Play!" button to begin! </p>
