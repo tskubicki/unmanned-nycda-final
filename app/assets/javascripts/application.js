@@ -13,8 +13,12 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
+//
+// Bootstrap requirement
+//= require bootstrap-sprockets
 //
 // JS required by the Construct 2 Game engine
 //= require c2runtime.js
 //= require data.js
+//
+//= require_tree .
