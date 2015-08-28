@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   post 'game/create'
 
   get 'landing/index'
+  get '/' => 'landing#splash'
 
   devise_for :users, :controllers => { registrations: 'registrations' }
   resources :users
@@ -26,7 +27,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-   root 'landing#index'
+   root 'landing#splash'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

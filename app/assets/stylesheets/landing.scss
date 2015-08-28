@@ -1,3 +1,47 @@
 // Place all the styles related to the landing controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+html, body{
+	width: 100%;
+	height: 100%;
+}
+
+body{
+	background-image: url('bg.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+}
+
+.title-image{
+	display: block;
+	margin: 0 auto;
+}
+
+.splash-container{
+	width: 33%;
+	min-width: 600px;
+	height: 33%;
+	
+	margin: auto;
+	position: absolute;
+  	top: 0; bottom: 0; left: 0; right: 0;
+	padding:10px;
+	border-radius: 10px;
+	background-color: black;
+	background: rgba(0, 0, 0, .85);
+}
+
+.tagline{
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+
+.splash-buttons{
+	display: block;
+	margin: 0 auto;
+	text-align: center;
+}
+

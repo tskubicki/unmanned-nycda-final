@@ -1,0 +1,26 @@
+<% if user_signed_in? %>
+	<%= render partial: "/navbar" %>
+<% end %>
+
+<div class="splash-container">
+	<%= image_tag "title.png", :class => "title-image" %>
+	<div class="splash-content">
+		<div class="tagline">
+		  <div>
+		  	<h4 style="text-align: center;margin-top:3%">Not welcome, and with no way out.</h4>
+			<h4 style="text-align: center;margin-bottom:3%">How long can you last?</h4>
+			<div class="splash-buttons">
+				<% if user_signed_in? %>
+					<button type="button" class="btn-lg btn-info link-text-white" style="display:inline"><%=link_to('Go to your profile',user_path(current_user))%></button>
+					<h4 style="display:inline;margin: 3%;">or</h4> 
+					<button type="button" class="btn-lg btn-success link-text-white" style="display:inline"><%=link_to('New Game',game_play_path)%></button>
+				<% else %>
+					<button type="button" class="btn-lg btn-primary link-text-white" style="display:inline"><%=link_to('Login',new_user_session_path)%></button>
+					<h4 style="display:inline;margin: 3%;">or</h4> 
+					<button type="button" class="btn-lg btn-info link-text-white" style="display:inline"><%=link_to('Sign up',new_user_registration_path)%></button>			
+				<% end %>
+			</div>
+		  </div>
+		</div>		
+	</div>
+</div>
