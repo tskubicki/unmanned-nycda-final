@@ -12,7 +12,7 @@ class FriendshipsController < ApplicationController
 		@friendship = Friendship.new(friendship_params)
 		if @friendship.save
 			#success
-			redirect_to friendships_path
+			redirect_to :back
 		else
 			redirect_to new_friendship_path(@friendship)
 		end

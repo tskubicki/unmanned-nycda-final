@@ -1,5 +1,5 @@
 <%= render partial: "/navbar" %>
-<%= javascript_include_tag "https://www.google.com/jsapi", "chartkick" %>
+
 <div class="profile-container">
 	<div class="account-info row">
 		<div class="col-md-8">
@@ -28,6 +28,8 @@
 			</div>
 		</div>
 	</div>
+
+	<!-- Display games -->
 	<% if @user_games.length > 0 %>
 		<h3 style="text-align:center">Most recent game:</h3>
 		<div class="last-game">
@@ -40,7 +42,7 @@
 			<% end %>
 		<% end %>
 	<% else %>
-		<p> You havent played any games yet. Click on the "Play!" button to begin! </p>
+		<p> No games on record.</p>
 	<% end %>
 
 	<div class="friends-list" >
