@@ -31,35 +31,55 @@
 
 	<!-- Display games -->
 	<% if @user_games.length > 0 %>
-		<h3 style="text-align:center">Most recent game:</h3>
+		<h3 style="text-align:center">Most recent game</h3>
 		<div class="last-game">
-			<%= render partial: "game_entry", locals: {game: @last_game.first} %>
+			<%= render partial: "game_entry", locals: {game: @user_games.first} %>
 		</div>
 		<% if @user_games.length > 1 %>
-			<h3 style="text-align:center">Past games:</h3>
-			<% @user_games.each do |game| %>
+			<h3 style="text-align:center">Past games</h3>
+			<% @user_games.offset(1).each do |game| %>
 				<%= render partial: "game_entry", locals: {game: game} %>
 			<% end %>
 		<% end %>
 	<% else %>
-		<p> No games on record.</p>
+		<h4 style="text-align:center">No games on record</h4>
 	<% end %>
 
 	<div class="friends-list" >
-		<h2>Friends</h2>
-		<% @friends.each do |f| %>
-			<p>
-			  <%= image_tag f.avatar.url(:thumb) %> 
-			  <%= f.username %>
-			  <%= link_to "Profile", user_path(f.id) %>
-			</p>
-		<% end %>
+		<h3 style="text-align:center">Friends</h3>
+		<div class="friends-container">
+			<% @friends.each do |f| %>
+				<div class="friend-entry">
+				  <%= image_tag f.avatar.url(:thumb), :class => "friend-avatar" %> 
+				  <p class="friend-name"><%= f.username %></p>
+				  <%= link_to "Profile", user_path(f.id), :class => "friend-link btn btn-primary" %>
+				</div>
+			<% end %>
+			<div class="clearfix"></div>
+		</div>
 	</div>
+	<h3 style="text-align:center">Wall</h3>
+	<div class="wall-container">
 
-	<div class="new-message-container" style="background-color: yellow">
+		<div class="wall-messages" >
+			<% @messages.each do |m| %>
+				<div class="wall-message row">
+					<div class="col-md-2">
+						<p class="wall-message-sender">
+							<%= m.sender.username %> says:
+							<!-- <span style="text-align:right"><%= m.created_at %></span> -->
+						</p>
+					</div>
+					<div class="col-md-10">
+						<p class="message-timestamp">on <%= m.created_at %></p>
+						<p class="wall-message-content"><%= m.content %></p>
+					</div>
+				</div>
+			<% end %>
+		</div>
 		<% if @user.errors.any? %>
 		    <div id="error_explanation">
-			    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+			    <h6><%= pluralize(@user.errors.count, "error") %> prohibited this message from being sent:</h6>
 			    <ul>
 				    <% @user.errors.full_messages.each do |msg| %>
 				    	<li><%= msg %></li>
@@ -67,26 +87,18 @@
 			    </ul>
 		    </div>
 		<% end %>
-		<%= form_for @message do |m| %>
-			
-			<%= m.hidden_field :sender_id, value: current_user.id %>
-			<%= m.hidden_field :user_id, value: @user.id %>
-			<div class="field">
-				<%= m.label "Write a message to #{@user.username}" %><br />
-				<%= m.text_area :content, autofocus: true %>
-			</div>
-
-			<div class="actions">
-			    <%= m.submit "Submit" %>
-			</div>
-		<% end %>
-	</div>
-
-	<h2>Your wall</h2>
-	<div class="wall-container" style="background-color: teal">
-		<% @messages.each do |m| %>
-			<%= m.sender.username %><br>
-			<%= m.content %><br><br>
-		<% end %>
+		<div class="write-message">
+			<%= form_for @message do |m| %>			
+				<%= m.hidden_field :sender_id, value: current_user.id %>
+				<%= m.hidden_field :user_id, value: @user.id %>
+				<div class="field">
+					<%= m.label "Write a message to #{@user.username}" %><br />
+					<%= m.text_area :content, autofocus: true, :cols => 75, :rows => 3, :class => "message-content" %>
+				</div>
+				<div class="actions">
+				    <%= m.submit "Submit", :class => "message-submit btn btn-primary"%>
+				</div>
+			<% end %>
+		</div>
 	</div>
 </div>

@@ -1,14 +1,23 @@
 <%= render partial: "/navbar" %>
 
-<%= form_tag(users_path, :method => "get") do %>
-      <%= text_field_tag :search, params[:search], placeholder: "Search" %>
-      <%= submit_tag :search %>
-<% end %>
+<h2 style="text-align: center"> Players List </h2>
 
-<% @users.each do |u| %>
-	<p>
-		<%= image_tag u.avatar.url(:thumb) %>
-		<%= u.username %>
-		<%= link_to "Profile", user_path(u.id) %>
-	</p>
-<% end %>
+<div class="players-list" >
+	
+	<div class="players-container">
+		<div class="player-search">
+		<%= form_tag(users_path, :method => "get") do %>
+	      <%= text_field_tag :search, params[:search], placeholder: "Search", :class => "player-search-bar form-control" %>
+	      <%= submit_tag :search, :class => "player-search-submit btn btn-primary" %>
+		<% end %>
+	</div>
+		<% @users.each do |f| %>
+			<div class="player-entry">
+			  <%= image_tag f.avatar.url(:thumb), :class => "player-avatar" %> 
+			  <p class="player-name"><%= f.username %></p>
+			  <%= link_to "Profile", user_path(f.id), :class => "player-link btn btn-primary" %>
+			</div>
+		<% end %>
+		<div class="clearfix"></div>
+	</div>
+</div>

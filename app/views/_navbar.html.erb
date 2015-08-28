@@ -19,7 +19,7 @@
 		<ul class="nav navbar-nav navbar-right space-out-buttons" style="margin-right: 0.5%">
 			<% if user_signed_in? %>
 			  <li>
-			  	<button type="button" class="btn btn-success navbar-btn link-text-white"><strong><%=link_to('Play!',game_play_path)%></strong></button>
+			  	<button type="button" class="btn btn-success navbar-btn link-text-white"><strong><%=link_to('New Game',game_play_path)%></strong></button>
 			  </li>	
 			  <li>
 			  	<button type="button" class="btn btn-info navbar-btn link-text-white"><%=link_to('Your Profile',new_user_session_path)%></button>
@@ -30,7 +30,7 @@
 				  </li>		
 			  <% end %>
 			  <li>
-			  	<button type="button" class="btn btn-danger navbar-btn link-text-white"><%=link_to "Logout #{current_user.username}", destroy_user_session_path,method: :delete%></button>
+			  	<button type="button" class="btn btn-danger navbar-btn link-text-white"><%=link_to "Logout", destroy_user_session_path,method: :delete%></button>
 			  </li>
 			<% else %>
 			  <li>
