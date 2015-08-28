@@ -65,10 +65,11 @@
 			<% @messages.each do |m| %>
 				<div class="wall-message row">
 					<div class="col-md-2">
-						<p class="wall-message-sender">
-							<%= m.sender.username %> says:
+						<div class="wall-message-sender">
+							<%= image_tag m.sender.avatar.url(:thumb), :class => "account-avatar" %>
+							<%= m.sender.username %>
 							<!-- <span style="text-align:right"><%= m.created_at %></span> -->
-						</p>
+						</div>
 					</div>
 					<div class="col-md-10">
 						<p class="message-timestamp">on <%= m.created_at %></p>
