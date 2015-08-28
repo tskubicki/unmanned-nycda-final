@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+//
+//User profile page stuff
+//
+
 .profile-container{
 	padding:2%;
 }
@@ -122,6 +126,30 @@
 	padding: 0.5;
 }
 
+//
+//User signin/signup/logout page stuff
+//
+
+.user-form-container{
+	display:block;
+	margin: 40px auto 0 auto;
+	width: 50%;
+	padding:10px;
+	border-radius: 10px;
+	background-color: black;
+	background: rgba(0, 0, 0, .85);
+	text-align: center;
+}
+
+.user-form-fields{
+	display: block;
+	margin: 0 auto;
+	width: 66%;
+}
+
+//
+// Clearfix
+//
 clearfix{
 	width:100%;
 	height:1px;

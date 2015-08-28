@@ -22,7 +22,7 @@
 			  	<button type="button" class="btn btn-success navbar-btn link-text-white"><strong><%=link_to('New Game',game_play_path)%></strong></button>
 			  </li>	
 			  <li>
-			  	<button type="button" class="btn btn-info navbar-btn link-text-white"><%=link_to('Your Profile',new_user_session_path)%></button>
+			  	<button type="button" class="btn btn-info navbar-btn link-text-white"><%=link_to('Your Profile',user_path(current_user))%></button>
 			  </li>
 			  <% if user_signed_in? && current_user.role.is_admin %>
 				  <li>

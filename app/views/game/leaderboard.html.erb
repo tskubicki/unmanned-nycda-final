@@ -1,5 +1,18 @@
 <%= render partial: "/navbar" %>
-<h2>Global Leaderboard</h2>
-<% @global_leaderboard.each_with_index do |u, count| %>
-	<p><%=count + 1%> <%= image_tag u.avatar.url(:thumb) %> <%= u.username %> <%= u.total %></p>
-<% end %>
+<div class="leaderboard-container">
+	<h2 style="text-align: center; border-bottom: thin solid white">Global Leaderboard</h2>
+	<div class="row" style="border-bottom: thin solid white; padding:1%; ">
+			<div class="col-md-3 board-entry"><h3>Rank</h3></div>
+			<div class="col-md-3 board-entry"><h3>Avatar<h3></div>
+			<div class="col-md-3 board-entry"><h3>Name</h3></div>
+			<div class="col-md-3 board-entry"><h3>Score</h3></div>
+		</div>
+	<% @global_leaderboard.each_with_index do |u, count| %>
+		<div class="row" style="border-bottom: thin solid white; padding:1%; ">
+			<div class="col-md-3 board-entry"><h4> #<%=count + 1%></h4></div>
+			<div class="col-md-3 board-entry"><%= image_tag u.avatar.url(:thumb) %></div>
+			<div class="col-md-3 board-entry"><h4><%= u.username %></h4></div>
+			<div class="col-md-3 board-entry"><h4><%= u.total %></h4></div>
+		</div>
+	<% end %>
+</div>

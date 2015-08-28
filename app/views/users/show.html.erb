@@ -45,48 +45,52 @@
 		<h4 style="text-align:center">No games on record</h4>
 	<% end %>
 
-	<div class="friends-list" >
-		<h3 style="text-align:center">Friends</h3>
-		<div class="friends-container">
-			<% @friends.each do |f| %>
-				<div class="friend-entry">
-				  <%= image_tag f.avatar.url(:thumb), :class => "friend-avatar" %> 
-				  <p class="friend-name"><%= f.username %></p>
-				  <%= link_to "Profile", user_path(f.id), :class => "friend-link btn btn-primary" %>
-				</div>
-			<% end %>
-			<div class="clearfix"></div>
+	<% if @friends.any? %>
+		<div class="friends-list" >
+			<h3 style="text-align:center">Friends</h3>
+			<div class="friends-container">
+				<% @friends.each do |f| %>
+					<div class="friend-entry">
+					  <%= image_tag f.avatar.url(:thumb), :class => "friend-avatar" %> 
+					  <p class="friend-name"><%= f.username %></p>
+					  <%= link_to "Profile", user_path(f.id), :class => "friend-link btn btn-primary" %>
+					</div>
+				<% end %>
+				<div class="clearfix"></div>
+			</div>
 		</div>
-	</div>
+	<% end %>
 	<h3 style="text-align:center">Wall</h3>
-	<div class="wall-container">
 
-		<div class="wall-messages" >
-			<% @messages.each do |m| %>
-				<div class="wall-message row">
-					<div class="col-md-2">
-						<div class="wall-message-sender">
-							<%= image_tag m.sender.avatar.url(:thumb), :class => "account-avatar" %>
-							<%= m.sender.username %>
-							<!-- <span style="text-align:right"><%= m.created_at %></span> -->
+	<div class="wall-container">
+		<% if @messages.any? %>
+			<div class="wall-messages" >
+				<% @messages.each do |m| %>
+					<div class="wall-message row">
+						<div class="col-md-2">
+							<div class="wall-message-sender">
+								<%= image_tag m.sender.avatar.url(:thumb), :class => "account-avatar" %>
+								<%= m.sender.username %>
+								<!-- <span style="text-align:right"><%= m.created_at %></span> -->
+							</div>
+						</div>
+						<div class="col-md-10">
+							<p class="message-timestamp">on <%= m.created_at %></p>
+							<p class="wall-message-content"><%= m.content %></p>
 						</div>
 					</div>
-					<div class="col-md-10">
-						<p class="message-timestamp">on <%= m.created_at %></p>
-						<p class="wall-message-content"><%= m.content %></p>
-					</div>
-				</div>
+				<% end %>
+			</div>
+			<% if @user.errors.any? %>
+			    <div id="error_explanation">
+				    <h6><%= pluralize(@user.errors.count, "error") %> prohibited this message from being sent:</h6>
+				    <ul>
+					    <% @user.errors.full_messages.each do |msg| %>
+					    	<li><%= msg %></li>
+					    <% end %>
+				    </ul>
+			    </div>
 			<% end %>
-		</div>
-		<% if @user.errors.any? %>
-		    <div id="error_explanation">
-			    <h6><%= pluralize(@user.errors.count, "error") %> prohibited this message from being sent:</h6>
-			    <ul>
-				    <% @user.errors.full_messages.each do |msg| %>
-				    	<li><%= msg %></li>
-				    <% end %>
-			    </ul>
-		    </div>
 		<% end %>
 		<div class="write-message">
 			<%= form_for @message do |m| %>			
